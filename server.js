@@ -1,17 +1,24 @@
-const http = require('http');
+const express = require('express');
 
-const server = http.createServer((request, response) =>{
-    console.log("headers:",request.headers );
-    console.log("method:",request.method );
-    console.log("url:",request.url );
-const user = {
-    name: 'Mpho Vincent',
-    hobby: 'Coding, Gaming and Drawing',
-    age: 23
-}
-    response.setHeader('Content-Type', 'application/json');
-    response.end(JSON.stringify(user));
-    console.log("I hear you!!. thanks for the request.")
+const app = express();
+
+app.get('/', (req, res)=>{
+    res.send('Getting root')
 });
 
-server.listen(3001);
+app.get('/profile', (req, res)=>{
+    res.send('Getting profile')
+});
+
+app.post('/profile', (req, res)=>{
+    const user = {
+        name: "Siphosenkosi Vincent",
+        surname: "Senkosi",
+        age: 24,
+        hobby: 'Traveling, Drawing and swimming',
+        Specialisation: "Software Developer"
+    }
+    res.send(user)
+});
+
+app.listen(3001);
